@@ -1,2 +1,2 @@
-console.log("Amigo que tal?")
-console.log("Nosotros estamos aprendiendooo!!")
+console.log("yo");
+console.log("Nosotros estamos aprendiendooo!!");
