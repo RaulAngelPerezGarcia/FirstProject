@@ -1,1 +1,2 @@
-console.log("yolo")
+console.log("Amigo que tal?")
+console.log("Nosotros estamos aprendiendooo!!")
