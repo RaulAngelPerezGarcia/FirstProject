@@ -8,6 +8,8 @@
 
   <body>
 
+  	<h1>Hello Aasdddngel Website</h1>
+
   	<div id="uploads"></div>
   	<div class="dropzone" id="dropzone"> Drop files in here to upload</div>
 
@@ -16,30 +18,11 @@
     	(function() {
     		var dropzone = document.getElementById('dropzone');
 
-    		var upload = function(files){
-    			var formData = new FormData(),
-    				xhr = new XMLHttpRequest(),
-    				x;
-
-    			for(x = 0; x < files.length; x = x+1){
-    				formData.append('file[]', files[x])
-    			}
-
-    			xhr.onload = function() {
-    				var data = this.responseText;
-    				console.log(data)
-    			}
-
-    			xhr.open('post', 'upload.php');
-    			xhr.send(formData);
-
-    		}
 
     		dropzone.ondrop = function(e){
     			e.preventDefault();
     			this.className = 'dropzone'
-    			upload(e.dataTransfer.files);
-    			
+    			console.log(e.dataTransfer.files);
     		}
 
     		dropzone.ondragover = function(){
@@ -60,7 +43,30 @@
 
 
   	
- <!-- In body
+<!-- 
+    		
+var upload = function(files){
+	var formData = new FormData(),
+		xhr = new XMLHttpRequest(),
+		x;
+
+	for(x = 0; x < files.length; x = x+1){
+		formData.append('file[]', files[x])
+	}
+
+	xhr.onload = function() {
+		var data = this.responseText;
+		console.log(data)
+	}
+
+	xhr.open('post', 'upload.php');
+	xhr.send(formData);
+
+}
+<! upload(e.dataTransfer.files); >
+
+
+In body
     <h1>Hello Angel Website</h1>
     <p>
       This is my website
