@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Drag and drop Uploading</title>
+    <link rel="stylesheet" href="styles.css">
+
+  </head>
+
+  <body>
+
+  	<div id="uploads"></div>
+  	<div class="dropzone" id="dropzone"> Drop files in here to upload</div>
+
+
+    <script>  
+    	(function() {
+    		var dropzone = document.getElementById('dropzone');
+
+    		var upload = function(files){
+    			var formData = new FormData(),
+    				xhr = new XMLHttpRequest(),
+    				x;
+
+    			for(x = 0; x < files.length; x = x+1){
+    				formData.append('file[]', files[x])
+    			}
+
+    			xhr.onload = function() {
+    				var data = this.responseText;
+    				console.log(data)
+    			}
+
+    			xhr.open('post', 'upload.php');
+    			xhr.send(formData);
+
+    		}
+
+    		dropzone.ondrop = function(e){
+    			e.preventDefault();
+    			this.className = 'dropzone'
+    			upload(e.dataTransfer.files);
+    			
+    		}
+
+    		dropzone.ondragover = function(){
+    			this.className = 'dropzone dragover';
+    			return false
+    		}
+
+    		dropzone.ondragleave = function(){
+    			this.className = 'dropzone';
+    			return false
+    		}
+
+    	}())
+    </script>
+
+  </body>
+</html>
+
+
+  	
+ <!-- In body
+    <h1>Hello Angel Website</h1>
+    <p>
+      This is my website
+      And I am trying to make it better
+      
+    </p>
+    <div>
+      <input type="number" name="firstNumber" id="vari1" >
+    </div>
+    <div>
+      <input type="number" name="secondNumber" id="vari2">
+    </div>
+    <div>
+      <button id="button">add the numbers me</button>
+    </div>
+    <div id="result">
+      
+    </div>
+
+    <div>
+    	<form action="index.php" method="post" enctype="multipart/form-data">
+    		<label for="file">Choose a file:</label>
+    		<input type="file" name="file1"/>
+    		<input type="submit" name="button" value="Send!">
+    	</form>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+ -->
