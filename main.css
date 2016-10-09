@@ -1,0 +1,16 @@
+/*This is a custom CSS file and this is how you make comments*/
+
+.bg-cover{
+	background: url(images/slide2.png);
+	height: 500px;
+	width: 600px
+	background-size: cover; 
+}
+
+.my-sidebar{
+	margin-top: 20px;
+}
+
+.my-body{ 
+	padding-top: 60px; 
+}
