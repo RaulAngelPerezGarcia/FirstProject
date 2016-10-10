@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RaulAngelPerezGarcia/FirstProject/issues"
   },
-  "homepage": "https://github.com/RaulAngelPerezGarcia/FirstProject#readme"
+  "homepage": "https://github.com/RaulAngelPerezGarcia/FirstProject#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
 }
