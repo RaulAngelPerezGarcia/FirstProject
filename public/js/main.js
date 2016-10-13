@@ -1,5 +1,3 @@
-console.log('Hello Kristianworld');
-
 $(function() {
 	$("input:file").change(function (){
 		var fileName = $(this).val();
