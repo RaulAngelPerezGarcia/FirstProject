@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 // connect to mongo
-mongoose.connect('localhost', 'testing_storeImg');         // From app2.js
+//mongoose.connect('localhost', 'testing_storeImg');         // From app2.js
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -29,7 +29,7 @@ var router = express.Router();              // get an instance of the express Ro
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-	res.sendFile(__dirname + '/index.html');
+	res.sendFile(__dirname + '/views//index.html');
 });
 
 router.route('/file').post( function(req, res) {

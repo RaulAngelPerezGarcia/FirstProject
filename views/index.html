@@ -4,7 +4,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8"><!-- To make sure the website is unicode? -->
-		<title> Website used to learn bootstrap?</title>
+		<title> YourOlderSelf</title>
 
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -107,6 +107,15 @@
 			</div>
 
 			<div class="row">
+				<div class="col-lg-12">
+					<h1>Upload a picture of yourself</h1>
+					<button class="btn btn-success" type="button"> Select a file</button>
+				</div>
+					
+			</div>
+
+			<!-- No need for the paragraphs
+			<div class="row">
 				<section class="col-md-8">
 					<h1>Page title</h1>
 					<p>
@@ -150,14 +159,8 @@
 					</div>
 				</aside>
 			</div>
+			-->
 			
-			<div class="row">
-				<div class="col-lg-12">
-					<h1>Here you can upload your picture</h1>
-				</div>
-					<input type="file" name="file" class="btn btn-default">
-			</div>
-
 			<div class="row">
 				<footer class="col-sm-12">
 					<p class="text-center">&copy; Angel copyright 2016</p>
@@ -165,6 +168,7 @@
 			</div>
 		</div>
 
+		<input id="upload-input" type="file" name="uploads[]" multiple="multiple"></br>
 		<!-- JavaScript files should be linked at the bottom of the page -->
 
 		<script src="./js/jquery.min.js"></script>
