@@ -1,17 +1,40 @@
-var express = require('express');
-var app = express();
-var path = require('path');
-var formidable = require('formidable');
-var fs = require('fs');
+// server.js
 
-app.use(express.static(path.join(__dirname, '/public')));
+// BASE SETUP
+// =============================================================================
+
+// call the packages we need
+var express 	= require('express');
+var path 		= require('path');
+var app 		= express();
+var formidable	= require('formidable');
+var fs 			= require('fs');
+
 
 app.use('/js', express.static(__dirname, + '/js'));
 app.use('/css', express.static(__dirname, + '/css'));
 
+
+
+
+var port = process.env.PORT || 8080;        // set our port
+
+app.use(express.static(path.join(__dirname, '/public')));
+
+// ROUTES FOR OUR API
+// =============================================================================
+var router = express.Router();              // get an instance of the express Router
+
+// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'views/index.html'));
 });
+
+// more routes for our API will happen here
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use('/', router);
 
 app.post('/upload', function(req, res){
 	console.log('We are sending a post');
@@ -24,7 +47,6 @@ app.post('/upload', function(req, res){
 
 	// store all uploads in the /uploads directory
 	form.uploadDir = path.join(__dirname, '/uploads');
-	console.log(form);
 
 	// every time a file has been uploaded successfully,
 	// rename it to it's orignal name
@@ -40,7 +62,7 @@ app.post('/upload', function(req, res){
 	// once all the files have been uploaded, send a response to the client
 	form.on('end', function() {
 		res.end('success');
-		console.log('form.on')
+		console.log('The File has been successfully uploaded')
 	});
 
 	// parse the incoming request containing the form data
@@ -48,6 +70,40 @@ app.post('/upload', function(req, res){
 
 });
 
-var server = app.listen(8080, function(){
+
+// Error handlers
+// =============================================================================
+// Catch 404 adn forwar to error handler
+app.use(function(req, res, next){
+	var err = new Error('No encontrado');
+	err.status = 404;
+	next(err);
+});
+// Development error handler
+// will print stacktrace
+if (app.get('env') === 'development'){
+	app.use(function(req, res, next){
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: err
+		});
+	});
+}
+
+// Production error handler
+// no stacktraces leaked to user
+app.use(function(req, res, next){
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: {}
+		});
+	});
+
+// START THE SERVER
+// =============================================================================
+
+var server = app.listen(port, function(){
 	console.log('Server listening on port 8080');
 });
