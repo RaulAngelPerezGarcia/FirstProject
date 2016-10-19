@@ -1,25 +1,13 @@
-.btn:focus, .upload-btn:focus{
-  outline: 0 !important;
-}
-
-html,
+console.log('Hello world')
 body {
-  height: 100%;
-  background-color: #4791D2;
-}
-
-body {
+  padding-top: 100px;
   text-align: center;
   font-family: 'Raleway', sans-serif;
 }
 
-.row {
-  margin-top: 80px;
-}
-
 .upload-btn {
   color: #ffffff;
-  background-color: #F89406;
+  background-color: #66a3ff;
   border: none;
 }
 
@@ -28,8 +16,33 @@ body {
 .upload-btn:active,
 .upload-btn.active {
   color: #ffffff;
-  background-color: #FA8900;
+  background-color: #0066ff;
   border: none;
+}
+
+.glyphicon-cloud-upload {
+  font-size: 5em;
+  color: #9CA3A9;
+}
+
+
+#upload-input {
+  display: none;
+}
+/**
+
+.btn:focus, .upload-btn:focus{
+  outline: 0 !important;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: none;
+}
+
+.row {
+  margin-top: 80px;
 }
 
 h4 {
@@ -37,10 +50,6 @@ h4 {
   color: #B8BDC1;
 }
 
-.glyphicon {
-  font-size: 5em;
-  color: #9CA3A9;
-}
 
 h2 {
   margin-top: 15px;
@@ -52,18 +61,17 @@ h2 {
   padding-bottom: 20px;
 }
 
-#upload-input {
-  display: none;
-}
 
 @media (min-width: 768px) {
   .main-container {
-    width: 100%;
+	width: 100%;
   }
 }
 
 @media (min-width: 992px) {
   .container {
-    width: 450px;
+	width: 450px;
   }
 }
+*/
+
