@@ -10,16 +10,20 @@ var app 		= express();
 var formidable	= require('formidable');
 var fs 			= require('fs');
 
+//For mongoose
+var mongooose = require('mongoose');
+//app.use(bodyParser.json());
+var routes = require('./routes/imagefile');
 
-app.use('/js', express.static(__dirname, + '/js'));
-app.use('/css', express.static(__dirname, + '/css'));
 
-
+// not needed
+//app.use('/js', express.static(__dirname, + '/js'));
+//app.use('/css', express.static(__dirname, + '/css'));
+app.use(express.static(path.join(__dirname + '/public')));
 
 
 var port = process.env.PORT || 8080;        // set our port
 
-app.use(express.static(path.join(__dirname, '/public')));
 
 // ROUTES FOR OUR API
 // =============================================================================
