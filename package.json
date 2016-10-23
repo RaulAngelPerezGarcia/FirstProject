@@ -1,5 +1,5 @@
 {
-  "name": "mementomori",
+  "name": "yourolderself",
   "version": "1.0.0",
   "description": "your older self",
   "main": "index.js",
@@ -10,13 +10,21 @@
     "type": "git",
     "url": "git+https://github.com/RaulAngelPerezGarcia/FirstProject.git"
   },
-  "author": "",
+  "author": "Angel and Kristian",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/RaulAngelPerezGarcia/FirstProject/issues"
   },
   "homepage": "https://github.com/RaulAngelPerezGarcia/FirstProject#readme",
   "dependencies": {
-    "bootstrap": "^3.3.7"
-  }
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "formidable": "^1.0.17",
+    "mongoose": "^4.6.3",
+    "multer": "^1.2.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {}
 }
