@@ -11,7 +11,7 @@ var formidable	= require('formidable');
 var fs 			= require('fs');
 
 //For mongoose
-var mongooose = require('mongoose');
+var mongooose = require('mongoose'); 
 //app.use(bodyParser.json());
 var router = require('./router/imagefile');
 
