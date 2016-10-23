@@ -13,7 +13,7 @@ var fs 			= require('fs');
 //For mongoose
 var mongooose = require('mongoose');
 //app.use(bodyParser.json());
-var routes = require('./routes/imagefile');
+var router = require('./router/imagefile');
 
 
 // not needed
@@ -25,7 +25,35 @@ app.use(express.static(path.join(__dirname + '/public')));
 var port = process.env.PORT || 8080;        // set our port
 
 
-// ROUTES FOR OUR API
+// =============================================================================
+// =============================================================================
+
+// connect to mongo http://mongoosejs.com/docs/connections.html
+
+
+mongoose.connect('mongodb://localhost/test');
+
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+	console.log('we are connected man');
+  // we're connected!
+});
+
+var kittySchema = mongoose.Schema({
+    name: String
+});
+
+
+
+
+
+
+// =============================================================================
+// =============================================================================
+
+// router FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
@@ -34,10 +62,10 @@ app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
-// more routes for our API will happen here
+// more router for our API will happen here
 
-// REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
+// REGISTER OUR router -------------------------------
+// all of our router will be prefixed with /api
 app.use('/', router);
 
 app.post('/upload', function(req, res){
@@ -74,6 +102,19 @@ app.post('/upload', function(req, res){
 
 });
 
+// =============================================================================
+//URL : http://localhost:8080/images/
+// To get all the images/files stored in MongoDB
+app.get('/images', function(req, res) {
+	//calling the function from index.js class using router object..
+	router.getImages(function(err, genres) {
+		if (err) {
+			console.log('User, there has been an error: \n' + err)
+			throw err;
+		}
+		res.json(genres);
+	});
+});
 
 // Error handlers
 // =============================================================================
