@@ -39,6 +39,24 @@ $('#upload-input').on('change', function(){
 });
 
 
+$('#show-image').on('click', function(){
+	console.log('I am being clicked');
+	$.ajax({
+		url: '/images',
+		type: 'GET',
+		dataType: 'json',
+		success: function(data){
+			data.forEach(function(img){
+
+				var imgr = document.createElement('img');
+				imgr.src = img.url;
+				document.getElementById('imagesyu').appendChild(imgr);
+				console.log(imgr);	
+			})
+		}			
+	});
+
+});
 
 /** This is what I had from before
 
