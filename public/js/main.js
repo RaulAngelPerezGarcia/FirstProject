@@ -19,7 +19,6 @@ $('#upload-input').on('change', function(){
 		// loop through all the selected files
 		for (var i = 0; i < files.length; i++){
 			var file = files[i];
-
 			// Add the files to formData object for the data payload
 			formData.append('uploads[]', file, file.name)
 		}
@@ -47,7 +46,6 @@ $('#show-image').on('click', function(){
 		dataType: 'json',
 		success: function(data){
 			data.forEach(function(img){
-
 				var imgr = document.createElement('img');
 				imgr.src = img.url;
 				document.getElementById('imagesyu').appendChild(imgr);
@@ -57,25 +55,3 @@ $('#show-image').on('click', function(){
 	});
 
 });
-
-/** This is what I had from before
-
-$(function() {
-	$("input:file").change(function (){
-		var fileName = $(this).val();
-		console.log(fileName);
-		 $.ajax({
-			url: '/file',
-			type: 'POST',
-			// contentType: 'application/json',
-			data: {'fileName': fileName},
-			success: function( data, textStatus, jQxhr ){
-				console.log(data.message);
-			},
-			error: function( jqXhr, textStatus, errorThrown ){
-				console.log( errorThrown );
-			}
-		});
-	});
-});
-*/

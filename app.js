@@ -1,6 +1,4 @@
-// server.js
-
-// BASE SETUP
+// server
 // =============================================================================
 
 // call the packages we need
@@ -9,51 +7,28 @@ var path 		= require('path');
 var app 		= express();
 var formidable	= require('formidable');
 var fs 			= require('fs');
-//For mongoose
-var mongoose = require('mongoose'); 
-//app.use(bodyParser.json());
-var router = require('./router/imagefile');
+var mongoose 	= require('mongoose'); 
+var router 		= require('./router/imagefile');
+var Image 		= require('./models/image.js');
+var port 		= process.env.PORT || 8080;
+var db 			= mongoose.connection;
+var router 		= express.Router(); 
+
 
 
 app.use(express.static(path.join(__dirname + '/public')));
 
-var port = process.env.PORT || 8080;
-
-
-
 mongoose.connect('mongodb://localhost/test');
 
-var Image = require('./models/image.js');
-
-//console.log(Image);
-
-var testImage = new Image({
-	name: 'FirstImage',
-	url: 'https://pbs.twimg.com/profile_images/269279233/llama270977_smiling_llama_400x400.jpg'
-});
-
-
-testImage.save(function(err) {
-	if (err) throw err;
-	console.log('User saved succsescfully yo')
-});
-
-
-
-var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
+
 db.once('open', function() {
-	console.log('we are connected man');
-  // we're connected!
+	console.log('We are connected to mongoose');
 });
 
-var router = express.Router();         
-
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'views/index.html'));
 });
-
 
 // REGISTER OUR router 
 app.use('/', router);
@@ -66,12 +41,46 @@ app.post('/upload', function(req, res){
 
 	// specify that we want to allow the user to upload multiple files in a single request
 	form.multiples = true;
+	console.log(form);
+
+	// =============================================================================
+	// every time a file has been uploaded successfully,
+	// rename it to it's orignal name
+	/**
+	form.on('file', function(field, file) {
+		fs.rename(file.path, path.join(form.uploadDir, file.name));
+	});
+
+	// log any errors that occur
+	form.on('error', function(err) {
+		console.log('An error has occured: \n' + err);
+	});
+
+	// once all the files have been uploaded, send a response to the client
+	form.on('end', function() {
+		res.end('success');
+		console.log('The File has been successfully uploaded')
+	});
+
+	// parse the incoming request containing the form data
+	form.parse(req);
+	*/
+	// =============================================================================
+
+	var testImage = new Image({
+		name: 'FirstImage',
+		url: 'https://pbs.twimg.com/profile_images/269279233/llama270977_smiling_llama_400x400.jpg'
+	});
+
+	testImage.save(function(err) {
+		if (err) throw err;
+		console.log('Image saved succsescfully')
+	});
 
 });
 
-// =============================================================================
-//URL : http://localhost:8080/images/
 // To get all the images/files stored in MongoDB
+// =============================================================================
 app.get('/images', function(req, res) {
 	Image.find({}, function(err, users){
 		if (err) throw err;
@@ -81,9 +90,6 @@ app.get('/images', function(req, res) {
 	})
 
 });
-
-
-
 
 // START THE SERVER
 // =============================================================================
