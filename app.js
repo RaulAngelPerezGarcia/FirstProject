@@ -15,7 +15,6 @@ var db 			= mongoose.connection;
 var router 		= express.Router(); 
 
 
-
 app.use(express.static(path.join(__dirname + '/public')));
 
 mongoose.connect('mongodb://localhost/test');
