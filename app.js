@@ -17,8 +17,8 @@ var router 		= express.Router();
 var aws = require('aws-sdk');
 
 
-var AWS_ACCESS_KEY 	= 'AKIAJN5OLGDKGRNDCF3Q'
-var AWS_SECRET_KEY 	= 'V0nolD86U+D/dsbKkBiyyYhe2do1+UVUFbyrzQdv'
+var AWS_ACCESS_KEY 	= ''
+var AWS_SECRET_KEY 	= ''
 var S3_BUCKET 		= 'yourolderself'
 
 
