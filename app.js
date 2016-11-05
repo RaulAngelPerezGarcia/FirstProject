@@ -25,6 +25,7 @@ var S3_BUCKET 		= 'yourolderself'
 
 app.use(express.static(path.join(__dirname + '/node_modules')));
 app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.static(path.join(__dirname + '/node_modules')));
 
 mongoose.connect('mongodb://localhost/test');
 
@@ -43,7 +44,6 @@ app.use('/', router);
 
 app.post('/upload', function(req, res){
 	console.log('We are sending a post');
-
 	/**
 	// create an incoming form object
 	var form = new formidable.IncomingForm();
@@ -73,8 +73,6 @@ app.post('/upload', function(req, res){
 	// parse the incoming request containing the form data
 	form.parse(req);
 	*/
-	// =============================================================================
-
 	var testImage = new Image({
 		name: 'FirstImage',
 		url: 'https://pbs.twimg.com/profile_images/269279233/llama270977_smiling_llama_400x400.jpg'
