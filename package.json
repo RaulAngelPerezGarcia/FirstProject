@@ -17,13 +17,13 @@
   },
   "homepage": "https://github.com/RaulAngelPerezGarcia/FirstProject#readme",
   "dependencies": {
+    "aws-sdk": "^2.6.12",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
-    "ejs": "^2.5.2",
     "express": "^4.14.0",
     "formidable": "^1.0.17",
+    "jquery": "^3.1.1",
     "mongoose": "^4.6.3",
-    "multer": "^1.2.0",
     "path": "^0.12.7"
   },
   "devDependencies": {}
