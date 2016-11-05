@@ -23,6 +23,7 @@ var S3_BUCKET 		= 'yourolderself'
 
 
 
+app.use(express.static(path.join(__dirname + '/bootstrap/dist')));
 app.use(express.static(path.join(__dirname + '/public')));
 
 mongoose.connect('mongodb://localhost/test');
