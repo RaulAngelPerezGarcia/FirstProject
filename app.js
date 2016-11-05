@@ -43,6 +43,7 @@ app.use('/', router);
 app.post('/upload', function(req, res){
 	console.log('We are sending a post');
 
+	/**
 	// create an incoming form object
 	var form = new formidable.IncomingForm();
 
@@ -53,7 +54,6 @@ app.post('/upload', function(req, res){
 	// =============================================================================
 	// every time a file has been uploaded successfully,
 	// rename it to it's orignal name
-	/**
 	form.on('file', function(field, file) {
 		fs.rename(file.path, path.join(form.uploadDir, file.name));
 	});
