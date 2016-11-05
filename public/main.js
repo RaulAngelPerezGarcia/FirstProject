@@ -7,35 +7,47 @@ $('.upload-btn').on('click',function(){
 
 $('#upload-input').on('change', function(){
 
-	var files = $(this).get(0).files;
+	var file = $(this).get(0).files[0];
 
-		// One or more files selected, process the file upload
-	if (files.length > 0){
+	$.ajax({
+		url: '/sign',
+		type: 'GET',
+		data: {
+			"file_name": file.name,
+			"file_type": file.type
+		},
+		success: function(data){
+			console.log('Dear user, the upload was a successful')
+			uploadToS3(data, file);
+		}			
+	});
+//Before I had it here
+}); 
 
-		// Create a FormData object which will be sent as 
-		// the data payload in the AJAX request
-		var formData = new FormData();
-
-		// loop through all the selected files
-		for (var i = 0; i < files.length; i++){
-			var file = files[i];
-			// Add the files to formData object for the data payload
-			formData.append('uploads[]', file, file.name)
-		}
-
-		$.ajax({
-			url: '/upload',
-			type: 'POST',
-			data: formData,
-			processData: false,
-			contentType: false,
-			success: function(data){
-				console.log('Dear user, the upload was successful')
-			}			
-		});
+var uploadToS3 = function(s3Info, file){
+	console.log(s3Info)
+	console.log(file)
+	var xhr = new XMLHttpRequest();
+	xhr.open("PUT", s3Info.signed_request);
+	xhr.setRequestHeader('x-amz-acl', 'public-read');
+//	xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+	xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+       	console.log(s3Info.url)
+		   var imgr = document.createElement('img');
+			imgr.src = 'https://s3-eu-west-1.amazonaws.com/yourolderself/' + file.name;
+			document.getElementById('imagesyu').appendChild(imgr);
+			console.log(imgr);
+      }
+      else{
+        alert('Could not upload file.');
+      }
+    }
 	}
 
-});
+	xhr.send(file);
+};
 
 
 $('#show-image').on('click', function(){
@@ -55,3 +67,19 @@ $('#show-image').on('click', function(){
 	});
 
 });
+
+
+
+
+
+	/** what i had before
+	$.ajax({
+		url: '/upload',
+		type: 'POST',
+		data: formData,
+		processData: false,
+		contentType: false,
+		success: function(data){
+			console.log('Dear user, the upload was successful')
+		}			
+	});*/		

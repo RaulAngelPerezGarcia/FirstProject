@@ -14,6 +14,13 @@ var port 		= process.env.PORT || 8080;
 var db 			= mongoose.connection;
 var router 		= express.Router(); 
 
+var aws = require('aws-sdk');
+
+
+var AWS_ACCESS_KEY 	= ''
+var AWS_SECRET_KEY 	= ''
+var S3_BUCKET 		= 'yourolderself'
+
 
 
 app.use(express.static(path.join(__dirname + '/public')));
@@ -41,7 +48,7 @@ app.post('/upload', function(req, res){
 	var form = new formidable.IncomingForm();
 
 	// specify that we want to allow the user to upload multiple files in a single request
-	form.multiples = true;
+	form.multiples = false;
 	console.log(form);
 	*/
 	var testImage = new Image({
@@ -55,6 +62,32 @@ app.post('/upload', function(req, res){
 	});
 
 });
+
+
+router.get('/sign', function(req, res) {
+	aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
+
+	var s3 = new aws.S3()
+	var options = {
+	  Bucket: S3_BUCKET,
+	  Key: req.query.file_name,
+	  Expires: 60,
+	  ContentType: req.query.file_type,
+	  ACL: 'public-read'
+	}
+
+	s3.getSignedUrl('putObject', options, function(err, data){
+		console.log(err);
+		if(err) return res.send('Error with S3')
+
+
+		res.json({
+			signed_request: data,
+			url: 'https://s3.amazonaws.com/' + S3_BUCKET + '/' + req.query.file_name
+		  })
+	})
+})
+
 
 // To get all the images/files stored in MongoDB
 // =============================================================================
